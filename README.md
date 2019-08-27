@@ -1,11 +1,11 @@
-##A CLI for Customer Database showcasing the use of modules like commander.js,inquirer.js,mongoose
+## A CLI for Customer Database showcasing the use of modules like commander.js,inquirer.js,mongoose
 
-#Prequisites
+# Prequisites
 
 1.  Make sure mongo service is up and running
 2.  Run mongod
 
-#Options Available
+# Options Available
 
 1.  Add Customer: : Run => `customer_cli a`
 2.  Find Customer : Run => `customer_cli f <name>`
