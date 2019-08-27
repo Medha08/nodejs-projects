@@ -1,4 +1,4 @@
-## A CLI for Customer Database showcasing the use of modules like commander.js,inquirer.js,mongoose
+## A CLI for Customer Database 
 
 # Prequisites
 
@@ -13,4 +13,7 @@
 4.  Remove Customer: Run => `customer_cli <id>`
 5.  Update Customer: Run => `customer_cli <id>`
 
-Note: In both add and update customer options user is asked some set of questions to create/update new user with those values.
+Note: 
+1. In both add and update customer options user is asked some set of questions to create/update new user with those values.
+2. It is made to showcase the use of modules like commander.js,inquirer.js,mongoose
+
