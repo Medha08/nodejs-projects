@@ -1,0 +1,5 @@
+1. Create a CLI to interact with MongoDB Database of Customers
+2. Add some interaction like ask questions while adding a new entry
+3. Use modules like mongoose,commander, inquirer for the project
+4. CLI should have different options like --version, -a and other shortcuts
+5. Include features like add/remove/update/delete customer.
