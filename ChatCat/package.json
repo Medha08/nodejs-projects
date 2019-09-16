@@ -1,0 +1,24 @@
+{
+  "name": "ChatCat",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "connect-mongo": "^3.0.0",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "mogoose": "0.0.1-security",
+    "mongoose": "^5.7.1",
+    "nodemon": "^1.19.2"
+  },
+  "engines": {
+    "node": "8.15.0"
+  }
+}
