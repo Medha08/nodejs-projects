@@ -1,5 +1,11 @@
 {
   "host": "http://localhost:3000",
   "dbURI": "mongodb://localhost:27017/test",
-  "secretKey": "medhapandeyapp"
+  "secretKey": "medhapandeyapp",
+  "fb": {
+    "clientID": "2212433732218794",
+    "clientSecret": "c47af625b50a6521ee8dd10d881d6fe9",
+    "callbackURL": "//localhost:3000/auth/facebook/callback",
+    "profileFields":["id","displayName","photos"]
+  }
 }
