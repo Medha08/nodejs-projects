@@ -1,16 +1,17 @@
-const express = require("express")
+const express = require("express");
 const app = express();
-const port = process.env.PORT || 4000;
 
-app.set("view engine","ejs");
-app.use(express.static(__dirname+"/public"))
+const loginRegister = require("./login_register");
 
-app.get("/",(req,res,next)=>{
-  res.send("Welcome Home")
-})
+const port = process.env.PORT || 4040;
 
-app.listen(port,(err)=>{
-  if(!err){
-    console.log(`Articaly listening at port ${port}`)
+app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
+
+app.use("/", loginRegister.router);
+
+app.listen(port, err => {
+  if (!err) {
+    console.log(`Medium Clone listening at port ${port}`);
   }
-})
+});
