@@ -10,6 +10,7 @@ if (process.env.NODE_ENV === "production") {
       callbackURL: process.env.host + "/auth/facebook/callback",
       profileFields: ["id", "displayName", "photos"]
     }
+    
   };
 } else {
   //offer dev stage settings and data

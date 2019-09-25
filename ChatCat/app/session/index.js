@@ -4,7 +4,6 @@ const config = require("../config");
 const db = require("../db");
 
 const mongoose = db.mongoose.connect;
-console.log("Mongoose", mongoose);
 
 if (process.env.NODE_ENV === "production") {
   //Implement the Sessions using settings config of production

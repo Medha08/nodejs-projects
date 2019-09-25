@@ -1,4 +1,5 @@
 const helper = require("../helper");
+const passport = require("passport");
 module.exports = () => {
   const routes = {
     get: {
@@ -13,13 +14,18 @@ module.exports = () => {
       "/chatroom": (req, res, next) => {
         res.render("chatroom");
       },
-      "/getDataSession": (req, res, next) => {
-        res.send("This is session Data" + req.session.hello);
-      },
-      "/setDataSession": (req, res, next) => {
-        req.session.hello = "Hi All";
-        res.send("Session Data Set");
-      }
+      "/auth/facebook": passport.authenticate("facebook"),
+      "/auth/facebook/callback": passport.authenticate("facebook", {
+        successRedirect: "/rooms",
+        faliureRedirect: "/"
+      })
+      // "/getDataSession": (req, res, next) => {
+      //   res.send("This is session Data" + req.session.hello);
+      // },
+      // "/setDataSession": (req, res, next) => {
+      //   req.session.hello = "Hi All";
+      //   res.send("Session Data Set");
+      // }
     },
     post: {}
   };

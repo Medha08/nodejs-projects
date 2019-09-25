@@ -9,6 +9,8 @@
 // router.get("/get", (req, res, next) => {
 //   res.send("Hello Tgere!")
 // });
+//Social Auth Logic
+require("./auth")();
 
 const routes = require("./routes");
 const session = require("./session");
