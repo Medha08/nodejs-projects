@@ -1,5 +1,6 @@
 const passport = require("passport");
 const facebookStrategy = require("passport-facebook").Strategy;
+const twitterStrategy = require("passport-twitter").Strategy;
 const config = require("../config");
 const helper = require("../helper");
 
@@ -12,12 +13,14 @@ module.exports = () => {
     helper
       .findById(id)
       .then(user => {
+        // console.log("user", user);
         done(null, user);
       })
       .catch(error => console.log(error));
   });
 
   const authFuncCb = (accessToken, refreshToken, profile, done) => {
+    //console.log("AccessToken", accessToken, "Refresh token", refreshToken);
     //cb takes data out of auth to rest of our workflow
     //the callback is called verify callback
     //job is to find user in local db via  profile.id which represents userId as returned by fb
@@ -39,4 +42,5 @@ module.exports = () => {
   };
 
   passport.use(new facebookStrategy(config.fb, authFuncCb));
+  passport.use(new twitterStrategy(config.twitter, authFuncCb));
 };

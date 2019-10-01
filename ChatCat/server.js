@@ -29,13 +29,14 @@ app.use(express.static("public"));
 app.use("/", chatCat.session);
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.use("/", chatCat.router);
 // app.get("/dashboard", (req, res, next) => {
 //   console.log(req.hello);
 //   res.send("<h1> hello! This is a dashboard!" + req.hello + " </h1>");
 // });
 
-app.listen(app.get("port"), err => {
+chatCat.ioServer(app).listen(app.get("port"), err => {
   if (!err) {
     console.log("Listening at port 3000");
   }

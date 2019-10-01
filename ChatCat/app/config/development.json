@@ -6,6 +6,12 @@
     "clientID": "2212433732218794",
     "clientSecret": "c47af625b50a6521ee8dd10d881d6fe9",
     "callbackURL": "//localhost:3000/auth/facebook/callback",
-    "profileFields":["id","displayName","photos"]
+    "profileFields": ["id", "displayName", "photos"]
+  },
+  "twitter": {
+    "consumerKey": "15Khrh74ymFYdtXGzVrLy4cwJ",
+    "consumerSecret": "AjG7b3VBLB4OmWhSSWBkssNOFgasY1sKHLDJlOXWVKTZ8AFhGt",
+    "callbackURL": "//chatcat.com:3000/auth/twitter/callback",
+    "profileFields": ["id", "displayName", "photos"]
   }
 }
