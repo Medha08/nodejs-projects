@@ -1,4 +1,5 @@
 const helper = require("../helper");
+const logger = require("../logger");
 const passport = require("passport");
 const config = require("../config");
 module.exports = () => {
@@ -46,6 +47,11 @@ module.exports = () => {
       }),
       "/auth/twitter": passport.authenticate("twitter"),
       "/auth/twitter/callback": passport.authenticate("twitter", {
+        successRedirect: "/rooms",
+        faliureRedirect: "/"
+      }),
+      "/auth/github": passport.authenticate("github"),
+      "/auth/github/callback": passport.authenticate("github", {
         successRedirect: "/rooms",
         faliureRedirect: "/"
       }),

@@ -8,7 +8,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
       $(() => {
-        let socket = io("<%= host %>" + "/roomList");
+        let socket = io("/roomList");
         let newRoom = $("input[name=roomName]");
         // socket.on("connect", () => {
         //   console.log("Client Socket Connected")});
@@ -61,8 +61,6 @@
       <div class="roomsListDiv">
         <ul class="roomsList" id="roomsListUL">
           <!-- Loop list items here -->
-          <a href="/chatroom"><li>World Cuisine</li></a>
-          <a href="/chatroom"><li>Coffee and Conversations</li></a>
           <!-- Loop ends -->
         </ul>
       </div>

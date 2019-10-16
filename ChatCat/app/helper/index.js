@@ -152,20 +152,20 @@ let removeUserFromRoom = (allRooms, socket) => {
   for (let room of allRooms) {
     //Find User
     let findUser = room.user.findIndex((element, index, array) => {
-      console.log("Element", element);
+     // console.log("Element", element);
       if (element.socketID === socket.id) {
-        console.log(
-          element.socketID === socket.id,
-          element.socketID,
-          socket.id
-        );
+        // console.log(
+        //   element.socketID === socket.id,
+        //   element.socketID,
+        //   socket.id
+        // );
         return true;
       } else {
         return false;
       }
     });
 
-    console.log("findUser", findUser);
+    //console.log("findUser", findUser);
 
     if (findUser > -1) {
       socket.leave();

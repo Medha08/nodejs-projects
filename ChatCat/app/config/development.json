@@ -1,6 +1,6 @@
 {
   "host": "http://localhost:3000",
-  "dbURI": "mongodb://localhost:27017/test",
+  "dbURI": "mongodb+srv://medha8pandey:Medhapandey!1@clusterruster-q28ai.mongodb.net/medha8pandey?retryWrites=true&w=majority",
   "secretKey": "medhapandeyapp",
   "fb": {
     "clientID": "2212433732218794",
@@ -12,6 +12,12 @@
     "consumerKey": "15Khrh74ymFYdtXGzVrLy4cwJ",
     "consumerSecret": "AjG7b3VBLB4OmWhSSWBkssNOFgasY1sKHLDJlOXWVKTZ8AFhGt",
     "callbackURL": "//chatcat.com:3000/auth/twitter/callback",
+    "profileFields": ["id", "displayName", "photos"]
+  },
+  "github": {
+    "clientID": "fefb54d5c9cacca8f31b",
+    "clientSecret": "1d9eb570e56ece763bad8cda206b77d6a7055bf8",
+    "redirect_uri": "//localhost.com:3000/auth/github/callback",
     "profileFields": ["id", "displayName", "photos"]
   }
 }

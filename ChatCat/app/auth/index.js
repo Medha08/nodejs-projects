@@ -1,8 +1,10 @@
 const passport = require("passport");
 const facebookStrategy = require("passport-facebook").Strategy;
 const twitterStrategy = require("passport-twitter").Strategy;
+var gitHubStrategy = require("passport-github").Strategy;
 const config = require("../config");
 const helper = require("../helper");
+const logger = require("../logger");
 
 module.exports = () => {
   passport.serializeUser((user, done) => {
@@ -13,10 +15,10 @@ module.exports = () => {
     helper
       .findById(id)
       .then(user => {
-        // console.log("user", user);
+        //console.log("user", user);
         done(null, user);
       })
-      .catch(error => console.log(error));
+      .catch(error => logger.log("error", error));
   });
 
   const authFuncCb = (accessToken, refreshToken, profile, done) => {
@@ -36,11 +38,12 @@ module.exports = () => {
         helper
           .createNewUser(profile)
           .then(newChatUser => done(null, newChatUser))
-          .catch(error => console.log("Error while creating new user"));
+          .catch(error => logger.log("error", "Error while creating new user"));
       }
     });
   };
 
   passport.use(new facebookStrategy(config.fb, authFuncCb));
   passport.use(new twitterStrategy(config.twitter, authFuncCb));
+  passport.use(new gitHubStrategy(config.github, authFuncCb));
 };

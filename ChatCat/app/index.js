@@ -15,12 +15,15 @@ require("./auth")();
 
 const routes = require("./routes");
 const session = require("./session");
-
+const config = require("../app/config");
+const redis = require("redis").createClient;
+const adapter = require("socket.io-redis");
 //Create an IO Server Instance
 const ioServer = app => {
   app.locals.chatRoom = [];
   const server = require("http").Server(app);
-  const io = require("socket.io")(server);
+  const io = require("socket.io").listen(server);
+
   io.use((socket, next) => {
     require("./session")(socket.request, {}, next);
   });
@@ -37,5 +40,6 @@ router = activateRoutes();
 module.exports = {
   router: require("./routes")(),
   session,
-  ioServer
+  ioServer,
+  logger: require("./logger")
 };

@@ -45,7 +45,7 @@ module.exports = (io, app) => {
       socket.broadcast
         .to(data.roomId)
         .emit("updateUserList", JSON.stringify(userList.user));
-      console.log(userList);
+      //console.log(userList);
       socket.emit("updateUserList", JSON.stringify(userList.user));
     });
 
@@ -53,9 +53,16 @@ module.exports = (io, app) => {
     socket.on("disconnect", () => {
       let room = helper.removeUserFromRoom(allRooms, socket);
 
-      //   socket.broadcast
-      //     .to(room.roomId)
-      //     .emit("updateUserList", JSON.stringify(room.user));
+      socket.broadcast
+        .to(room.roomId)
+        .emit("updateUserList", JSON.stringify(room.user));
+    });
+
+    //New Message Arrives
+    socket.on("newMessage", data => {
+      socket.broadcast
+        .to(data.roomId)
+        .emit("messagesUpdate", JSON.stringify(data));
     });
   });
 };

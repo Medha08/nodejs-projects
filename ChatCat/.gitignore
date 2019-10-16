@@ -1,0 +1,4 @@
+#Node Dependencies
+node_modules
+#Dev_Config
+app/config/development.json

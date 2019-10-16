@@ -6,13 +6,20 @@
     <link rel="stylesheet" href="/css/chatroomStyles.css" />
     <script src="/js/jquery-2.1.4.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script
+      src="https://widget.cloudinary.com/v2.0/global/all.js"
+      type="text/javascript"
+    ></script>
     <script>
       $(() => {
-        let socket = io("<%= host %>" + "/chatter");
+        let socket = io("/chatter"); 
         let roomId = "<%= roomId %>";
         let userName = "<%= user.name %>";
         let userPic = "<%= user.profilePic %>";
         let chatUsers = $(".chatUsers");
+        let chatInput = $("input[name=userInput]");
+        let chatBlock = $(".chatMessages");
+        let uploadFile = $("#uploadFile");
 
         socket.on("connect", () => {
           console.log("Connected");
@@ -32,14 +39,73 @@
           </div>`;
         };
 
+        let updateMessageBlock = (userPic, message) => {
+          let template = `
+          <div class = "chatBlock">
+            <div class="userPic"><img src = "${userPic}" /></div>
+              <div class="chatMsg">
+               ${message}
+              </div>
+            </div>
+          </div>`;
+
+          $(template)
+            .hide()
+            .prependTo(chatBlock)
+            .slideDown(200);
+        };
+
         socket.on("updateUserList", data => {
           let parsedData = JSON.parse(data);
           let userListData = "";
           for (let user of parsedData) {
             userListData += userList(user);
           }
-          console.log("UserListData", userListData);
+          // console.log("UserListData", userListData);
           chatUsers.html("").html(userListData);
+        });
+
+        chatInput.on("keyup", function(evt) {
+          evt.preventDefault();
+
+          let messageDiv = $(this); // not used arrow func as won't get div via $(this)if used as Arrow functions do not bind their own this, instead, they inherit the one from the parent scope, which is called "lexical scoping".
+          if (evt.which === 13 && messageDiv.val() !== " ") {
+            // match the key pressed and not blank
+            let message = messageDiv.val();
+            socket.emit("newMessage", {
+              roomId,
+              userName,
+              userPic,
+              message
+            });
+            //Update the Local Feed
+            updateMessageBlock(userPic, message);
+            messageDiv.val("");
+          }
+        });
+        socket.on("messagesUpdate", data => {
+          let parsedData = JSON.parse(data);
+          updateMessageBlock(parsedData.userPic, parsedData.message);
+        });
+
+        uploadFile.on("click", function(evt) {
+          cloudinary.openUploadWidget(
+            { cloud_name: "dhnthfluu", upload_preset: "fheeduqs" },
+            function(error, result) {
+              if (!error && result.event === "success") {
+                console.log("Result", result);
+                let tmp = "";
+                tmp += `<img src=${result.info.url}></img>`;
+                updateMessageBlock(userPic, tmp);
+                socket.emit("newMessage", {
+                  roomId,
+                  userName,
+                  userPic,
+                  message: tmp
+                });
+              }
+            }
+          );
         });
       });
     </script>
@@ -59,19 +125,7 @@
       </div>
       <div class="chatListDiv">
         <div class="chatMessagesPanel">
-          <div class="chatMessages">
-            <!-- Loop this for chat messages -->
-            <div class="chatBlock">
-              <div class="userPic"><img src="<%= user.profilePic %>" /></div>
-              <div class="chatMsg">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Deleniti perferendis eius aut nesciunt necessitatibus ad nulla,
-                qui sequi, id nam. Possimus odit aut nisi veritatis amet
-                distinctio id officiis ipsam!
-              </div>
-            </div>
-            <!-- loop end -->
-          </div>
+          <div class="chatMessages"></div>
           <div class="typePanel">
             <input
               type="text"
